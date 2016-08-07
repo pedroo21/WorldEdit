@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>WorldEdit Documentation</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="masthead">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-md-offset-3">
+        <img src="./img/logo2.png">
+        <h2>An architectural approach <small>Software Architecture</small></h2>
+        <small>
+          <a href="https://github.com/pedroo21/">Pedro Lourenço</a>,
+          <a href="https://github.com/joaolrpaulo">João Paulo</a>,
+          <a href="https://github.com/marcopontes">Marco Pontes</a> e
+          <a href="https://github.com/andreiamargarida">Andreia Costa</a>
+        </small>
+        <p class="small">Oriented by Hugo Sereno e Rui Maranhão</p>
+        <p class="small">May 28, 2016</p>
+      </div>
+      <div class="col-md-2 text-center">
+        <img src="http://www.idpasc.lip.pt/LIP/events/2015_workshop_foundations/images/logo_FCUP.jpg"
+             class="img-responsive" align="center">
+      </div>
+    </div>
+  </div><!--/container-->
+</div><!--/masthead-->
+
+<!--main-->
+<div class="container-fluid">
+  <div class="row">
+    <!--left-->
+    <div class="col-md-3" id="leftCol">
+      <img src="img/architecture-2.jpg"
+           class="img-responsive circle-image">
+
+      <ul class="nav nav" id="sidebar">
+        <li class="tree">
+          <a class="tree-toggle" href="javascript:;">Introduction <span class="caret"></span></a>
+          <ul class="nav tree">
+            <li><a href="#sec0">User View</a></li>
+            <li><a href="#sec1">Developer View</a></li>
+          </ul>
+        </li>
+        <li class="tree">
+          <a class="tree-toggle" href="javascript:;">Features <span class="caret"></span></a>
+          <ul class="nav tree">
+            <li><a href="#sec2">Region Operations</a></li>
+            <li><a href="#sec3">Clipboard</a></li>
+            <li><a href="#sec4">Generation</a></li>
+            <li><a href="#sec5">Utility</a></li>
+          </ul>
+        </li>
+        <li class="tree">
+          <a class="tree-toggle" href="javascript:;">Stakeholders <span class="caret"></span></a>
+          <ul class="nav tree">
+            <li><a href="#sec6">Developers</a></li>
+            <li><a href="#sec7">Users</a></li>
+          </ul>
+        </li>
+        <li class="tree">
+          <a class="tree-toggle" href="javascript:;">Architecture <span class="caret"></span></a>
+          <ul class="nav tree">
+            <li><a href="#sec8">Logical View</a></li>
+            <li><a href="#sec9">Development View</a></li>
+            <li><a href="#sec10">Process View</a></li>
+            <li><a href="#sec11">Physical View</a></li>
+            <li><a href="#sec12">Scenarios</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec13">Storage</a></li>
+        <li class="tree">
+          <a class="tree-toggle" href="javascript:;">Contributing <span class="caret"></span></a>
+          <ul class="nav tree">
+            <li><a href="#sec14">Branching Model</a></li>
+            <li><a href="#sec15">Compiling</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec16">Improving WorldEdit</a></li>
+        <li><a href="#sec17">Conclusion</a></li>
+      </ul>
+    </div><!--/left-->
+
+    <!--right-->
+    <div class="col-md-9 col-md-offset-3">
+      <h1>Introduction</h1>
+      <hr>
+      <p>This project was made under a college domain (Software Arquitecture), and we want achieve some goals like:</p>
+      <ul>
+        <li>4+1 Architectural view model</li>
+        <li>Logical view</li>
+        <li>Development view</li>
+        <li>Process view</li>
+        <li>Physical view</li>
+        <li>Scenarios</li>
+      </ul>
+      <p>Our introduction chapter, will be divided under two sub-sections, an user and developer introductory view:</p>
+
+
+      <h2 id="sec0">User View</h2>
+      <hr>
+      <h3>WorldEdit, What is it?</h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-9">
+          <p>WorldEdit is a world editor for Minecraft which makes users life way more easy by
+            helping on some essentials things in game, like building structures, spawning objects,
+            and manipulate them, among others. In this analysis we will talk about how this in-game
+            framework works, and how it is implemented "behind the hood".
+
+            It holds some interesting features:</p>
+
+          <ul>
+            <li>Select a region of a map (like pinpoint two positions in map)</li>
+            <li>Fix map problems, such as broken water, missing snow, broken walls and much more!</li>
+            <li>Make big constructions with two clicks</li>
+            <li>Change blocks from one type to another, like from grass to diamond</li>
+            <li>Create objects with one click, e.g, trees, spheres, animals</li>
+          </ul>
+          <p>We aim to include different architectural views (more exactly, 4+1 Architecture view),
+            and his stakeholders. After this analysis, we pretend
+            to discuss about how we could improve this framework, contributing to the software and future developers.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-responsive circle-image" src="img/worldedit.png">
+          <p class="small">Figure 1 - Selection for decorative purposes</p>
+        </div>
+      </div>
+
+
+      <h2 id="sec1">Developer View</h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-10">
+          <p>In terms of developer view, and avoiding to spoil any conclusions, we want to get into some aspects
+            of Minecraft itself.</p>
+          <p>Minecraft was made in Java, and it's world is composed by chunks. Chunks are 16x16x256 segments, and they
+            are generated around players when they first enter the world. As they walk around, chunks are generated as
+            needed. They can also be forced to load into memory by world management tools, such as WorldEdit.</p>
+          <p>Our architecture views along this documentation, will describe how the main components communicate
+            with each other. Starting on the logical view up until the physical view, we can get really deeper into
+            the structure of the project.</p>
+          <ul>
+            <li>In the logical view, we will feature a class diagram with a description of some of the main classes or packages.</li>
+            <li>By the development view, a full described package diagram with the programmers perspective.</li>
+            <li>The process view will walk us by the activity diagram and behaviour.</li>
+            <li>In the physical view, the system from a system engineer's point of view. Deployment diagram will feature
+              the topology of software components different from the last views.</li>
+            <li>The last view, show us some use-cases of WorldEdit.</li>
+          </ul>
+        </div>
+        <div class="col-md-2">
+          <img height="300" width="80" src="img/chunk.png">
+          <p class="small">Figure 2 - Chunk</p>
+        </div>
+      </div>
+
+
+      <h1>Features <small>Very summarized overview with main functions</small></h1>
+      <hr>
+      <p>We will omit most command syntax. However, a detailed overview of all commands
+        can be found in the <a href="http://wiki.sk89q.com/wiki/WorldEdit">official documentation</a>.</p>
+
+
+      <h2 id="sec2">Region Operations</h2>
+      <hr>
+      <p>It's possible to perform a long range of region operations with WorldEdit.</p>
+      <p>To perform those kind of operations, the user is required to select a Cuboid area. This is done by selecting
+      two points which will create a rectangular selection (other shapes and formats can also be used).</p>
+      <p>Using the selected area, we can perform changes like:</p>
+      <ul>
+        <li>Setting Blocks</li>
+        <li>Replacing Blocks (example below)</li>
+        <li>Create walls</li>
+        <li>Place overlays over a range of blocks</li>
+        <li>Stacking (example below)</li>
+        <li>Move a set of blocks</li>
+        <li>Smooth an area, for example, a rough mountain</li>
+        <li>Naturalize, make an area look more natural with grass and dirt</li>
+        <li>Placing flora, scatter tall grass and flowers for grass or cactus for sand</li>
+        <li>Deform regions, applying a user defined equation</li>
+      </ul>
+      <div class="blockquote-box blockquote-primary">
+        <h4>
+          Region Selection</h4>
+        <p>
+          Usage: //wand <small>[Gives user an item that can be used to flag first position (left click) and second position (right click)]</small>
+        </p><p>Usage: //pos1 or //pos2 <small>[Selects first and second positions]</small>
+      </p>
+      </div>
+      <img src="img/ingame/cuboid.png">
+      <small>Figure 3 - Cuboid example</small>
+
+      <br><br>
+      <p>Some examples of region operations are:</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Setting/Replacing Blocks</h3>
+              <small>//replace [list-of-blocks-to-replace] [block-to-replace-with]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/replaceblocks.png">
+                <img width="418" height="350" src="img/ingame/replaceblocks.png">
+                <p class="small">Figure 4 - Example of replacing blocks</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Stacking</h3>
+              <small>//stack [count] [direction]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/stacking.jpg">
+                <img width="418" height="350" src="img/ingame/stacking.jpg">
+                <p class="small">Figure 5 - Example of stacking</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h2 id="sec3">Clipboard</h2>
+      <hr>
+      <p>WorldEdit provides the ability to have a clipboard that allows users to copy, paste and even save an area.
+      These cuboid areas can be saved into a file (<i>schematic files</i>) under a storage at
+        <code>\plugins\WorldEdit\schematics\</code> and loaded at any time with a simple command. The copy-paste
+      functionality saves the cuboid area in cache, in the user Local Session until we decide to paste it.</p>
+      <p>Some examples of clipboard operations are:</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Copy/Paste Areas</h3>
+              <small>//copy //paste [-aso]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/copypaste.png">
+                <img width="418" height="350" src="img/ingame/copypaste.png">
+                <p class="small">Figure 6 - Example of copy paste</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Schematics</h3>
+              <small>//schematic|schem save|load [format] [filename]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/schematic.png">
+                <img width="418" height="350" src="img/ingame/schematic.png">
+                <p class="small">Figure 7 - List of schematics in WorldEdit's directory</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h2 id="sec4">Generation</h2>
+      <hr>
+      <p>Generation tools provide us the ability to create a set of shapes (can be generated with mathematics) up to
+      a full forest.</p>
+      <p>This section is focused in creating architectural elements, like for example a sphere or a pyramid. WorldEdit
+      is also able to generate a forest like <code>/forestgen 10</code>:</p>
+      <blockquote>The command searches the area around you, controlled by the size parameter,
+        and it will descend in elevation a bit in order to find grass or dirt (trees will only be generated
+        on top of those two blocks),
+        but it will not ever go up above your feet.</blockquote>
+      <p>The generation algorithm was made clever to develop a forest according to surrounding area conditions. However,
+      it is not possible to get 100% density (a tree in every spot) as Notch's (creator of Minecraft)
+      tree algorithm won't permit that.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Generate a sphere/ellipsoid</h3>
+              <small>//hsphere [block] [radius],[radius],[radius] [raised?]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/hsphere.png">
+                <img width="418" height="350" src="img/ingame/hsphere.png">
+                <p class="small">Figure 8 - Generation of stone sphere</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Forest Generation</h3>
+              <small>//forestgen [size] [type] [density]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/forestgen.png">
+                <img width="418" height="350" src="img/ingame/forestgen.png">
+                <p class="small">Figure 9 - Forest generation</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h2 id="sec5">Utility</h2>
+      <hr>
+      <p>If we saw a lot of interesting features, it doesn't end here! Utility joins a lot of useful functions we often
+      manually struggle for. In sum, we want to distinguish tools like:</p>
+      <ul>
+        <li>Draining liquids</li>
+        <li>Filling pits</li>
+        <li>Removing annoying mobs</li>
+        <li>Extinguish fire</li>
+        <li>Brushes: build from far away</li>
+      </ul>
+      <p>One of the most interesting ones is the brushes. As the name says, we cannot only paint with it but we can
+      also generate blocks or shapes to where we are pointing to (terraforming). It also allows us to
+        smooth rough mountains and level terrains.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Generate spheres with a click</h3>
+              <small>//brush sphere [-h] [block] [radius]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/brushsphere.png">
+                <img width="418" height="350" src="img/ingame/brushsphere.png">
+                <p class="small">Figure 10 - Sphere brush example</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Smooth an area</h3>
+              <small>//brush smooth [-n] [size] [iterations]</small>
+            </div>
+            <div class="panel-body">
+              <a class="fancybox" rel="group" href="img/ingame/brushsmooth.png">
+                <img width="418" height="350" src="img/ingame/brushsmooth.png">
+                <p class="small">Figure 11 - Smooth brush example (Before: Figure 10)</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h1>Stakeholders</h1>
+      <hr>
+      <p>WorldEdit is made of a large necessity from the community all around the world running vanilla minecraft
+        or Bukkit/Forge servers. The project runs on a voluntary base and is featured in a large community of plugins
+        called Bukkit.</p>
+      <p>It's almost impossible for the community to imagine world or block management without WorldEdit,
+        we can conclude this by the large amount of users depending on it <code>13,963,291 downloads on 28/05/2016</code>.</p>
+
+      <img class="img-responsive" src="img/construction.jpeg">
+      <p class="small">Figure 12 - Example of a complex construction which would be hard to develop manually. Credits: Everbloom Studios Team</p>
+
+
+      <h2 id="sec6">Developers</h2>
+      <hr>
+      <p>WorldEdit has a large base of community contributors. We've grouped the main motors of this project below.
+        The 4 users below are classified as authors and have the most commits and activity in the active
+        development process of the software.</p>
+      <div class="row no-gutter">
+        <div class="col-md-6">
+          <img class="img-responsive" src="img/ingame/contributor1.png">
+        </div>
+        <div class="col-md-6">
+          <img class="img-responsive" src="img/ingame/contributor2.png">
+        </div>
+      </div>
+      <div class="row no-gutter">
+        <div class="col-md-6">
+          <img class="img-responsive" src="img/ingame/contributor3.png">
+        </div>
+        <div class="col-md-6">
+          <img class="img-responsive" src="img/ingame/contributor4.png">
+        </div>
+      </div>
+
+
+      <h2 id="sec7">Users</h2>
+      <hr>
+      <p>This stakeholder is made by a group of users that are part of communities like, Bukkit and Forge.
+        These last two, are the important part that create the bounds between minecraft and plugin loading.
+        Both conceive the required environment to load mods/plugins into the client. In our case, WorldEdit makes
+        world management easy, like plug & play. It’s also
+        <a href="http://dev.bukkit.org/bukkit-plugins/worldedit/">part of the Bukkit community</a>, along with
+        lots of other plugins. WorldEdit, however, implements a clever project structure that molds into
+        being multi-platform using adapters.</p>
+      <p>The users from communities like Bukkit or Forge, are the important part here, who need this plugin and
+        contribute to it daily, by suggesting new features or helping to fix problems.</p>
+
+
+
+      <h1>Architecture</h1>
+      <hr>
+      <p>This is the core part of our documentation. We aim to demystify the big tree of packages this project
+      consists on. Expand the software and provide other developers, the required knowledge
+      to be aware of the pillars it holds.</p>
+      <p>
+        In the following diagrams we tried to only represent the important classes or packages grouped
+        among all the project as this is a very complex software.
+        A full class diagram wouldn't be user-friendly, so we created a views joining all important related classes
+        aiming to make it easier to understand and explain what's happening.</p>
+
+
+      <h2 id="sec8">Logical View <small>Key parts and functional components</small></h2>
+      <hr>
+      <p>In sum, this project has three big packages (or Schemas):</p>
+
+      <ul>
+        <li><a href="https://github.com/joaolrpaulo/WorldEdit/tree/introduction/worldedit-core">WorldEdit-Core
+        </a>, this is the main project. It’s independent from any adapter.</li>
+        <li><a href="https://github.com/joaolrpaulo/WorldEdit/tree/introduction/worldedit-bukkit">WorldEdit-Bukkit
+        </a>, the adapter redirected to the Bukkit platform.</li>
+        <li><a href="https://github.com/joaolrpaulo/WorldEdit/tree/introduction/worldedit-forge">WorldEdit-Forge
+        </a>, the adapter redirected to the Forge platform.</li>
+      </ul>
+
+      <p>As for these last two, they are required to support WorldEdit on Minecraft through other platforms,
+        responsible for loading all the required plugins and create the functional environment.
+        All the classes that we didn't represent here, are the ones that we don't consider as
+        fundamental for the analysis.</p>
+
+      <h3>Command Manager <small>A clever way of dealing with storing and detecting commands</small></h3>
+      <hr>
+      <p>WorldEdit's way of managing commands is very sagaciously organized. From our study and previous knowledge
+      with Bukkit, we found out this command architecture is also featured in other author's plugins.
+      One of the main reasons is the simplicity of organizing all the required commands without having them all in a
+      class with a massive amount of <i>if statements</i>.</p>
+
+      <p>It consists in having a manager for commands (Command Manager Class) which will map each command string or alias
+      with corresponding method. The manager can register any command class, and will fetch method annotations like
+      the example below:</p>
+
+      <code style=display:block;white-space:pre-wrap>
+        @Command<span style="color: black;">(
+          aliases = { <span style="color: blue;">"/line"</span> },
+          usage = <span style="color: blue;">"[block] [thickness]"</span>,
+          desc = <span style="color: blue;">"Draws a line segment between cuboid selection corners"</span>,
+          help = <span style="color: blue;">"Help will be described here"</span>,
+          flags = <span style="color: blue;">"h"</span>,
+          min = <span style="color: orange;">1</span>,
+          max = <span style="color: orange;">2</span>
+        )
+        </span>
+        @CommandPermissions("worldedit.region.line")
+        @Logging(REGION)
+        <span style="color: darkblue;">public void</span> <span style="color: black;">line</span>(arguments) <span style="color: black;">{</span>
+          <span style="color: grey;">// Command method will describe here</span>
+        <span style="color: black;">}</span>
+      </code>
+
+      <p></p>
+      <p>Command Manager will register alias <i>"/line"</i> with method <i>"line(args)"</i>. Next time the user inputs a
+      command, manager will (call a dispatcher to) find which stored method is related to the input
+      (methods that are mapped with their aliases in a data structure):</p>
+
+      <pre>
+        <span style="color: blue;">MappedCommands</span>&lt;<span style="color: orange;">String, Method</span>&gt; contains
+
+        &lt;<span style="color: orange;">"line"</span>, <span style="color: blue;">public void</span> line(arguments)</span>&gt;</pre>
+
+      <p>This architecture is extremely useful to avoid code pollution and keep different commands separated per class or
+      category.</p>
+
+      <h3>Local Session</h3>
+      <hr>
+      <p>Local Session saves history from every command made by an user,
+        and helps us to know on-the-fly configurations from him. However, sessions are per user but not user bounded.</p>
+      <p>Local Session is the object that contains our clipboard, a set of configurations, brushes/masks, position 1/2
+      location and Edit Session history.</p>
+
+      <h4>Edit Session</h4>
+      <hr>
+      <p>Every time we make an operation, WorldEdit creates an Edit Session with the set of blocks we changed. This type
+      of session is saved as a list inside Local Session. If a user wants to undo, or redo, local session has all the
+      history saved as a list of Edit Session objects. So, we can easy go back in our history.</p>
+      <p>It's inside the Edit Session we find the main methods for world operations like:</p>
+      <ul>
+        <li><code>editSession.replaceBlocks()</code></li>
+        <li><code>editSession.setBlocks()</code></li>
+      </ul>
+
+      <p>We can have a better overview at the full diagram of this view:</p>
+
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/Logical%20View.png">
+          <img class="img-responsive" src="img/Logical%20View.png">
+          <small>Figure 13 - Logical View Diagram </small>
+        </a>
+      </div>
+
+
+      <h2 id="sec9">Development View</h2>
+      <hr>
+      <p>The WorldEdit is a modular tool composed by a main package, free of dependencies,
+        and by adapters that create bounds to the plugin.
+      <p><a href="http://dev.bukkit.org/bukkit-plugins/worldedit/"><b>Bukkit</b></a> is the adapter that
+      supports plugin connection to the game-server itself and
+      implementing classes related to, the wide range of blocks, entities and biomes. There is also a library
+      with useful tools for Bukkit commands and classes that provide an internal permissions system to WorldEdit.</p>
+      <p><b>Core</b> is the main package of the project. As mentioned previously, <b>it works without dependencies</b>,
+        meaning it's where adapters fit. Inside the core there are several sub-packages, such as "command-related"
+        packages that implement the control commands (<a href="#sec8">CommandManager</a>).</p>
+      <p><b>Forge</b> is composed by all classes that make up the main component loader. In addition there's a "GUI" package,
+        whose function is to handle the graphical user interface in Minecraft client associated with the adapter.</p>
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/Development%20View.png">
+          <img class="img-responsive" src="img/Development%20View.png">
+          <small>Figure 14 - Development View Diagram</small>
+        </a>
+      </div>
+
+
+      <h2 id="sec10">Process View</h2>
+      <hr>
+      <p>In this process view, we decided to feature one of the most important diagrams, Activity.</p>
+      <p>When the user first inputs a command, the Command Manager is responsible for implementing a method for
+      command detection. The command manager has a dispatcher which
+        <a href="#sec8">stores the command with respective method</a>. After efficiently checking if the command exists
+        it proceeds to call the session manager and fetch the user session.</p>
+      <h4>Does the user session exists?</h4>
+      <p>If session manager doesn't have any entry for that user, we will create one and return to the command manager.
+        Otherwise, the already created session will be returned.</p>
+
+      <h4>Back to the command Manager</h4>
+      <p>Command manager will now call the dispatcher to run the method associated to the input command.</p>
+
+      <h4>User has permission? Usage is correct?</h4>
+      <p>If not exceptions will be returned, caught to deliver a specific messaged associated to the error.</p>
+      <p>If no exceptions are returned, an Edit Session can now be created, this will save all our modifications
+      for later undo/redo case. The command class will then receive the session and execute the commands through it
+      (<a href="#sec8">more about how this happens</a>).</p>
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/Activity%20View.png">
+          <img class="img-responsive" src="img/Activity%20View.png">
+          <small>Figure 15 - Process View Diagram</small>
+        </a>
+      </div>
+
+
+      <h2 id="sec11">Physical View</h2>
+      <hr>
+      <p>This diagram represent where the artifacts go after being successfully compiled and archived.
+        After artifacts are ready, they are uploaded to multiples websites or communities, and then
+        users can download them, and upload the correct version to their own server or client.</p>
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/Physical%20View.png">
+          <img class="img-responsive" src="img/Physical%20View.png">
+          <small>Figure 16 - Physical View</small>
+        </a>
+      </div>
+
+
+      <h2 id="sec12">Scenarios</h2>
+      <hr>
+      <p>When we talk about scenarios we talk about every possible case that can happen by doing or using something,
+        this diagram, explains what can be made with this tool in a very simple and short way.</p>
+      <p>A small example of a use case description:</p>
+
+      <ul>
+        <li>Use Case: Create/Replace/Delete thousands of blocks</li>
+        <li>Actor: Minecraft User</li>
+        <li>Scope: A Minecraft server</li>
+        <li>Brief: Wants to replace 10 blocks of sand by grass</li>
+        <li>Precondition: Needs permissions on server to do it</li>
+        <li>Postcondition: Those 10 blocks should be grass</li>
+      </ul>
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/Use%20Cases.png">
+          <div class="col-md-12" align="center"><img src="img/Use%20Cases.png"></div>
+          <small>Figure 17 - Scenarios</small>
+        </a>
+      </div>
+
+
+
+      <h1>Storage</h1>
+      <hr>
+      <h2 id="sec13">YAML</h2>
+      <hr>
+      <p>YAML is a encoding format that makes data more readable by human beings,
+        it was inspired in languages such as XML, Python, Perl, and Internet Message Protocol.
+        It was created by Clark Evans, Brian Ingerson and Oren Ben-Kiki, by the year of 2000.</p>
+      <p>YAML (pronounced as "yammel"), was designed with a very proper idea,
+        that every data could be represented by a set of list, hashes, and simple values.
+        YAML only uses unicode characters (UTF-8 and UTF-16).YAML is relatively simple to use.
+        The respective file holds the information in a
+        indented format like the example below:</p>
+      <pre>
+        Blocks:
+        - Grass
+        - Sand
+        - Stone
+
+        Users:
+          Pedro: '- Developer'
+          Marco: '* Second Developer'
+          João: '# Developer'
+          Andreia: '\ Developer'</pre>
+      <p>Within the domain of the Java language, YAML fields can be easily accessed using:</p>
+      <code style=display:block;white-space:pre-wrap;>
+        <span style="color: darkorange;">yamlFile.getStringList</span>(<span style="color: blue">"Blocks"</span>);
+        // Will return a list ['Grass', 'Sand', 'Stone']
+      </code>
+      <code style=display:block;white-space:pre-wrap>
+        <span style="color: darkorange;">yamlFile.getConfigurationSection</span>(<span style="color: blue">'Users'</span>)<span style="color: darkorange;">.getKeys</span>(<span style="color: blue;">false</span>)
+        // Will return ['Pedro', 'Marco', 'Joao', 'Andreia']
+        // We can now do:
+
+        <span style="color: darkorange;">yamlFile.getString</span>(<span style="color: blue;">"Users.Pedro"</span>);
+        // Will return '- Developer'
+      </code>
+      <p></p>
+      <p>In the context of the project that we have been reviewing during this semester,
+        YAML is used to store some configurations related to multiple aspects such as:</p>
+      <ul>
+        <li>User data</li>
+        <li>World data</li>
+        <li>Blocks data</li>
+        <li>Command restrictions</li>
+        <li>Zone restrictions, among others.</li>
+      </ul>
+      An more particular example can be found at <a href="https://github.com/sk89q/WorldEdit/blob/master/
+      worldedit-bukkit/src/main/resources/defaults/config.yml">config.yml</a>.
+
+
+      <h1>Contributing</h1>
+      <hr>
+      <p>WorldEdit is open to community contributions. It's also useful if you need to create an adapter for your
+      software. However, your code must be efficient and tested.</p>
+      <p>Before cloning the project and start writing code, remember the checklist:</p>
+      <ul>
+        <li>Have all tabs been replaced into four spaces? Are indentations 4-space wide?</li>
+        <li>Have I written proper Javadocs for my public methods? Are the @param and @return fields actually filled out?</li>
+        <li>Have I git rebased my pull request to the latest commit of the target branch?</li>
+        <li>Have I combined my commits into a reasonably small number (if not one) commit using git rebase?</li>
+        <li>Have I made my pull request too large? Pull requests should introduce small sets of changes at a time.
+          Major changes should be discussed with the team prior to starting work.</li>
+        <li>Are my commit messages descriptive?</li>
+      </ul>
+
+      <h2 id="sec14">Branching Model</h2>
+      <hr>
+      <p>If you are not used to git, make sure to also be aware of their branching model.</p>
+      <p>To avoid consecutive merges, commit disorganization and code loss, WorldEdit follows successful branch model
+      as the figure below.</p>
+      <p>The develop branch (integration) is the core part where developers are working. Every time a developer
+        needs to create a new feature, they open a new branch, for example <code>feature/replaceblocks</code>.
+        After the new feature has been completed, that branch can now be merged back to develop.</p>
+
+      <p>Release branches support preparation of a new production release. They allow for last-minute
+        dotting of i’s and crossing t’s. When we finish a release branch, we merge it to master.
+        The changes made on the release branch also need to be merged back into develop,
+        so that future releases also contain these bug fixes.</p>
+
+      <p>Hotfix branches are required for critical bugfixes. When completed they need to be merged back into master
+      and develop must also receive those changes.</p>
+
+      <p>This is successful git production!</p>
+
+      <img class="img-responsive" src="img/gitmodel.png">
+      <small>Figure 18 - Successful Git Model</small>
+
+      <h2 id="sec15">Compiling</h2>
+      <hr>
+      <p>The build process uses Gradle, which isn't required to download.</p>
+      <ul>
+        <li>Navigate to WorldEdit folder</li>
+        <li><code>./gradlew clean setupDecompWorkspace</code></li>
+        <li><code>./gradlew build</code></li>
+      </ul>
+
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/compiling.png" style="margin-bottom:20px;">
+          <div class="col-md-12" align="center"><img src="img/compiling.png"></div>
+          <small>Figure 19 - Compiling WorldEdit</small>
+        </a>
+      </div>
+
+      <p style="margin-top: 20px;">After that you will find:
+      <ul>
+        <li>The core of WorldEdit in <code>worldedit-core/build/libs</code></li>
+        <li>Bukkit adapter in <code>worldedit-bukkit/build/libs</code></li>
+        <li>Forge adapter in <code>worldedit-forge/build/libs</code></li>
+      </ul>
+      </p>
+
+      <div class="container-corners">
+        <a class="fancybox" rel="group" href="img/compiling3.png" style="margin-bottom:20px;">
+          <div class="col-md-12" align="center"><img src="img/compiling3.png"></div>
+          <small>Figure 20 - Result of compiling WorldEdit</small>
+        </a>
+      </div>
+
+
+      <h1 id="sec16">Improving WorldEdit</h1>
+      <hr>
+      <h2>The Problem</h2>
+      <hr>
+      <p>Minecraft, more specific, the Bukkit Adapter has known limitations related to asynchronous world modification.
+        If we try to run block modifications in a separate thread we will get an exception like:</p>
+
+      <blockquote style=display:block;white-space:pre-wrap>[Timer-51/WARN]: java.lang.IllegalStateException: Asynchronous block remove!</blockquote>
+
+      <p>Derived from this, WorldEdit core runs every task using the main thread.
+        This decision can cause complications when performing tasks with a massive number of blocks.
+        As for example, if we try to paste a schematic with 1 million blocks running WorldEdit in a server
+        with the following specifications:</p>
+
+      <blockquote style=display:block;white-space:pre-wrap>
+        Intel Xeon E3 1225v2 3.2 GHz+
+
+        4GB of RAM allocated to the server
+      </blockquote>
+
+      <p>The server will stop responding after a few seconds, possibly causing world chunk errors.</p>
+
+      <h2>The Solution</h2>
+      <hr>
+      <p>
+        After studying the problem, it's possible to understand we can achieve an asynchronous operation
+        and still avoid to use a separate thread. We can do this by scheduling the number of blocks per a unit of time.
+        Let's take again our example of 1 million blocks. If we define a static constant of <strong>5000 blocks
+        per each second</strong>, we can schedule consecutive tasks and complete our task in about 3.33 minutes.</p>
+
+       <pre>
+         <strong>Task #1</strong>
+         Modify 5000 blocks
+         Run now
+
+         <strong>Task #2</strong>
+         Modify 5000 blocks
+         Run after 1 second
+
+         <strong>Task #3</strong>
+         Modify 5000 blocks
+         Run after 2 seconds</pre>
+      <p>
+
+      <p>After 200 tasks, we will complete our job. This method will give us the ability to see the progress
+      of our operation and avoid any world/chunk errors if the server gets shutdown. The job can be saved to
+      the disk and sustained any time.</p>
+
+
+
+      <h1 id="sec17">Conclusion <small>What did we learn?</small></h1>
+      <hr>
+      <p>WorldEdit is a very complex project. We enriched a lot of our knowledge about organized software
+      architecture by getting deeper into this project. It leaves us surprised studying such clever
+      code organization where most of the times people tend to find fixes.</p>
+
+      <p>In the logical and development architectures, more specifically, the managers and adapters, we were able
+      to learn a new diverse way of how to create multi-platform compatible software using adapters. Along with that,
+      we saw new ideas to centralize complex command classes, like the Command Manager does.</p>
+
+      <p>We, programmers, are used to, in our world, start something from <b>scratch</b>. We have to make lots of
+        <b>choices</b> while building software, some of them may not be the best if we are not used to the
+        <b>environment we are programming in</b>.
+      Most of the times we end up having to create a <i>"recode" version</i> of our project because we find out we can have a
+        <b>better architecture</b> than what we started in. How many times this <s>doesn't</s> happen?</p>
+
+      <p>In the real word, an architect cannot fail on this aspects. It can lead to a disaster and lots of
+        repercussions.</p>
+
+      <p>Programmers are always able to mold their project. But the moral in all this is that we can <b>greatly improve
+      our workflow</b> and save a lot of time if we make it right on our base software architecture. Having a <b>solid
+      architecture is the key to have a strong organized software</b>.</p>
+
+      <blockquote>
+        Although software has no mass, it does have weight, weight that can ossify any system by creating inertia to change and introducing crushing complexity.
+        <small>Grady Booch</small>
+      </blockquote>
+
+      And that's what we've learned!
+
+      <img class="img-responsive" src="img/architecture.jpg">
+      <p class="small">Figure 21 - Complex Architecture</p>
+
+      <p class="small">Website designed by <a href="https://github.com/pedroo21">Pedro Lourenço</a></p>
+
+    </div><!--/right-->
+  </div><!--/row-->
+</div><!--/container-->
+
+
+
+<!-- script references -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

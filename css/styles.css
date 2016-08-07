@@ -1,0 +1,167 @@
+/*
+A Bootstrap 3.1 affix sidebar template
+from http://bootply.com
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+body {
+    padding-top:30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.circle-image{
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    display:block;
+    background-position-y:25%;
+    border: 10px solid;
+    border-color: whitesmoke;
+}
+
+h1 {
+    margin-top : 30px;
+}
+
+h2,h3,h4,h5,h6 {
+    margin-top: 20px !important;
+}
+
+.container-corners {
+    margin: 30px;
+    overflow: hidden;
+}
+
+strong {
+    font-weight: 700;
+}
+
+#masthead {
+    min-height:150px;
+}
+
+#masthead h1 {
+    font-size: 30px;
+    line-height: 1;
+    padding-top:20px;
+}
+
+#masthead .well {
+    margin-top:8%;
+}
+
+@media screen and (min-width: 768px) {
+    #masthead h1 {
+        font-size: 50px;
+    }
+}
+
+.navbar-bright {
+    background-color:#111155;
+    color:#fff;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+    background-color: unset;
+    color: #fff;
+}
+
+.nav>li>a:focus {
+    background-color: unset;
+    color: #a2d3f2;
+}
+
+.affix-top,.affix{
+    position: static;
+}
+
+html, body, .container, .row {
+    height: 100%;
+}
+
+#leftCol > img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.tree > .tree {
+    background-color: #2a6496;
+}
+
+#leftCol {
+    text-align: center;
+    color: #fff !important;
+    border-right: 10px solid;
+    border-color: #1361a3;
+}
+
+a {
+    color: #a2d3f2; /* #9ccdec */
+}
+
+#sidebar {
+    margin-top: 30px;
+    line-height: 10px;
+    font-weight: 100;
+}
+
+hr {
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#CCD1D9;
+    color:#CCD1D9;
+    border: 0 none;
+}
+
+@media (min-width: 992px) {
+    #leftCol {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: block;
+        background-color: #0073b0;
+    }
+}
+
+#sidebar li.active {
+    border:0 #eee solid;
+    border-right-width:5px;
+    background-color: #2a6496;
+}
+
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.glyphicon-lg{font-size:3em}
+.blockquote-box{border-right:5px solid #E6E6E6;margin-bottom:25px; margin-top: 25px;}
+.blockquote-box > p {margin-top: 2px; margin-bottom: 2px;}
+.blockquote-box > h4 {margin-bottom: 5px;}
+.blockquote-box .square{width:100px;min-height:50px;margin-right:22px;text-align:center!important;background-color:#E6E6E6;padding:20px 0}
+.blockquote-box.blockquote-primary{border-color:#357EBD}
+.blockquote-box.blockquote-primary .square{background-color:#428BCA;color:#FFF}
+.blockquote-box.blockquote-success{border-color:#4CAE4C}
+.blockquote-box.blockquote-success .square{background-color:#5CB85C;color:#FFF}
+.blockquote-box.blockquote-info{border-color:#46B8DA}
+.blockquote-box.blockquote-info .square{background-color:#5BC0DE;color:#FFF}
+.blockquote-box.blockquote-warning{border-color:#EEA236}
+.blockquote-box.blockquote-warning .square{background-color:#F0AD4E;color:#FFF}
+.blockquote-box.blockquote-danger{border-color:#D43F3A}
+.blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
